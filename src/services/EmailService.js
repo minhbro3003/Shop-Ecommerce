@@ -47,6 +47,7 @@ const sendEmailCreateOrder = async (email, orderItems) => {
             const amount = item.amount || 0;
             const price = item.price || 0;
             const discount = item.discount || 0;
+            const shippingPrice = item.shippingPrice || 0;
 
             // Kiểm tra từng giá trị
             if (isNaN(amount) || isNaN(price) || isNaN(discount)) {
@@ -56,7 +57,7 @@ const sendEmailCreateOrder = async (email, orderItems) => {
 
             const subtotal = amount * price * (1 - discount / 100);
             // console.log("Subtotal:", subtotal);
-            return total + subtotal;
+            return total + subtotal + shippingPrice;
         }, 0);
         const formattedAmount = new Intl.NumberFormat("vi-VN").format(
             totalPrice
